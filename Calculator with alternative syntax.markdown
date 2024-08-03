@@ -36,64 +36,34 @@ npm test
 
 # Solution
 ```javascript
-exports.calculate = function calculate(expression) {
-  if (!expression) return 0;
-  const tokens = expression.trim().split(/\s+/);
-  return evaluateExpression(tokens);
-}
-
-function evaluateExpression(tokens) {
+exports.calculate = function calculate(expression){
+  if(!expression) return 0;
+  const token = expression.split(" ").reverse();
   const stack = [];
-  
-  for (let i = tokens.length - 1; i >= 0; i--) {
-    const token = tokens[i];
-    
-    if (isOperator(token)) {
-      // Ensure there are enough operands on the stack
-      if (stack.length < 2) {
-        throw new Error('Insufficient operands');
+
+  for(const n of token){
+    if(isNaN(n)){
+      let result;
+      switch(n){
+        case '+':
+          result = Number(stack.pop()) + Number(stack.pop());
+          break;
+        case '-':
+          result = Number(stack.pop()) - Number(stack.pop());
+          break;
+        case '*':
+          result = Number(stack.pop()) * Number(stack.pop());
+          break;
+        case '/':
+          result = Number(stack.pop()) / Number(stack.pop());
+          break;
       }
-      const a = stack.pop();
-      const b = stack.pop();
-      // Apply the operator and push the result back to the stack
-      const result = applyOperator(token, a, b);
       stack.push(result);
-    } else {
-      // Operand (including negative numbers): parse to number and push to stack
-      const number = parseFloat(token);
-      if (isNaN(number)) {
-        throw new Error(`Invalid number: ${token}`);
-      }
-      stack.push(number);
-    }
+    } 
+    else stack.push(n);
   }
-
-  if (stack.length !== 1) {
-    throw new Error('Invalid expression');
-  }
-
   return stack.pop();
 }
-
-const isOperator = (char) => ['+', '-', '*', '/'].includes(char);
-
-const applyOperator = (operator, a, b) => {
-  switch (operator) {
-    case '+':
-      return a + b;
-    case '-':
-      return a - b;
-    case '*':
-      return a * b;
-    case '/':
-      if (b === 0) {
-        throw new Error('Division by zero');
-      }
-      return a / b;
-    default:
-      throw new Error(`Unknown operator: ${operator}`);
-  }
-};
 ```
 
 # Unit Tests
