@@ -6,15 +6,10 @@ In this alternative notation, the operators precede the operands. For example, w
 The main advantage of this format is that it does not require parentheses for any ambiguous expression.
 
 Traditional notation
-3+4
-3-(4*5)
-(3+4)*5
+3+4 | 3-(4*5) | (3+4)*5
 
 Alternative notation
-+34
--3*45
-*+345
-
++34 | -3*45 | *+345
 
 In the code provided, the app/calculator.js file exports a calculate function. This function is expected to take an alternative expression as a string and output the numerical solution.
 We have included some tests to check this function works as expected.
