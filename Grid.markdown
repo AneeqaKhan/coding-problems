@@ -1,5 +1,6 @@
 ## Problem
 Display a grid like the below screenshot using HTML/CSS
+
 <img width="541" alt="Screenshot 2024-08-07 at 11 55 18 PM" src="https://github.com/user-attachments/assets/88dfe6e0-e2a8-4651-bcd1-a3ff085d8608">
 
 ## Solution
